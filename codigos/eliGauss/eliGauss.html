@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eliminação de Gauss</title>
+  <script>
+    function gaussianElimination() {
+      // Get input values
+      var matrix = [];
+      var size = parseInt(document.getElementById("size").value);
+      
+      // Read input matrix
+      for (var i = 0; i < size; i++) {
+        matrix[i] = [];
+        for (var j = 0; j <= size; j++) {
+          matrix[i][j] = parseFloat(document.getElementById("elem-" + i + "-" + j).value);
+        }
+      }
+
+      // Gaussian elimination algorithm
+      for (var i = 0; i < size; i++) {
+        // Find maximum in this column
+        var maxRow = i;
+        for (var j = i + 1; j < size; j++) {
+          if (Math.abs(matrix[j][i]) > Math.abs(matrix[maxRow][i])) {
+            maxRow = j;
+          }
+        }
+
+        // Swap rows
+        var temp = matrix[i];
+        matrix[i] = matrix[maxRow];
+        matrix[maxRow] = temp;
+
+        // Make all rows below this one 0 in current column
+        for (var j = i + 1; j < size; j++) {
+          var ratio = matrix[j][i] / matrix[i][i];
+          for (var k = i; k <= size; k++) {
+            matrix[j][k] -= ratio * matrix[i][k];
+          }
+        }
+      }
+
+      // Backward substitution
+      var solution = [];
+      for (var i = size - 1; i >= 0; i--) {
+        solution[i] = matrix[i][size];
+        for (var j = i + 1; j < size; j++) {
+          solution[i] -= matrix[i][j] * solution[j];
+        }
+        solution[i] /= matrix[i][i];
+      }
+
+      // Display the solution
+      var result = document.getElementById("result");
+      result.innerHTML = "Solução: " + solution.join(", ");
+    }
+  </script>
+</head>
+<body>
+  <h1>Eliminação de Gauss</h1>
+  <form>
+    <label for="size">Ordem Matriz:</label>
+    <input type="number" id="size" min="1" max="10" required><br>
+    <div id="matrix-inputs"></div>
+    <button type="button" onclick="gaussianElimination()">Resolver</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    // Generate matrix input fields dynamically based on size
+    document.getElementById("size").addEventListener("change", function() {
+      var size = parseInt(this.value);
+      var matrixInputs = document.getElementById("matrix-inputs");
+      matrixInputs.innerHTML = "";
+
+      for (var i = 0; i < size; i++) {
+        for (var j = 0; j <= size; j++) {
+          var input = document.createElement("input");
+          input.type = "number";
+          input.id = "elem-" + i + "-" + j;
+          input.required = true;
+          matrixInputs.appendChild(input);
+        }
+        matrixInputs.appendChild(document.createElement("br"));
+      }
+    });
+  </script>
+</body>
+</html>
