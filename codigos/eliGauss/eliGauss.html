@@ -12,7 +12,6 @@
       var matrizU = [];
       var matrizP = [];
 
-      // Ler os valores da matriz do formulário
       for (var i = 0; i < ordem; i++) {
         matriz[i] = [];
         matrizL[i] = [];
@@ -26,9 +25,7 @@
         }
       }
 
-      // Eliminação de Gauss
       for (var k = 0; k < ordem - 1; k++) {
-        // Encontrar o pivô máximo
         var maxPivo = Math.abs(matrizU[k][k]);
         var pivoRow = k;
         for (var p = k + 1; p < ordem; p++) {
@@ -38,18 +35,15 @@
           }
         }
 
-        // Trocar as linhas da matriz U e matriz P
         if (pivoRow !== k) {
           [matrizU[pivoRow], matrizU[k]] = [matrizU[k], matrizU[pivoRow]];
           [matrizP[pivoRow], matrizP[k]] = [matrizP[k], matrizP[pivoRow]];
         }
 
-        // Trocar as linhas da matriz L
         if (k > 0) {
           [matrizL[pivoRow], matrizL[k]] = [matrizL[k], matrizL[pivoRow]];
         }
 
-        // Eliminação de Gauss
         for (var i = k + 1; i < ordem; i++) {
           var fator = matrizU[i][k] / matrizU[k][k];
           matrizL[i][k] = fator;
@@ -59,7 +53,6 @@
         }
       }
 
-      // Resolução do sistema
       var solucao = new Array(ordem);
       solucao[ordem - 1] = matrizU[ordem - 1][ordem] / matrizU[ordem - 1][ordem - 1];
       for (var i = ordem - 2; i >= 0; i--) {
@@ -70,14 +63,12 @@
         solucao[i] /= matrizU[i][i];
       }
 
-      // Exibir a solução
       var resultado = document.getElementById("resultado");
       resultado.innerHTML = "Solução: ";
       for (var i = 0; i < ordem; i++) {
         resultado.innerHTML += "x" + (i + 1) + " = " + solucao[i].toFixed(2) + " ";
       }
 
-      // Exibir a matriz L
       var matrizLDisplay = document.getElementById("matriz-l");
       matrizLDisplay.innerHTML = "Matriz L: <br>";
       for (var i = 0; i < ordem; i++) {
@@ -87,7 +78,6 @@
         matrizLDisplay.innerHTML += "<br>";
       }
 
-      // Exibir a matriz U
       var matrizUDisplay = document.getElementById("matriz-u");
       matrizUDisplay.innerHTML = "Matriz U: <br>";
       for (var i = 0; i < ordem; i++) {
@@ -97,7 +87,6 @@
         matrizUDisplay.innerHTML += "<br>";
       }
 
-      // Exibir a matriz P
       var matrizPDisplay = document.getElementById("matriz-p");
       matrizPDisplay.innerHTML = "Matriz P: <br>";
       for (var i = 0; i < ordem; i++) {
@@ -119,9 +108,7 @@
 
     <br><br>
 
-    <div id="matriz-form">
-      <!-- Os campos da matriz serão gerados dinamicamente com base na ordem do sistema -->
-    </div>
+    <div id="matriz-form"></div>
 
     <br>
 
@@ -138,7 +125,6 @@
     <div id="matriz-p"></div>
   </div>
   <script>
-    // Função para gerar os campos da matriz dinamicamente
     function gerarCamposMatriz() {
       var ordem = parseInt(document.getElementById("ordem").value);
       var matrizForm = document.getElementById("matriz-form");
@@ -156,7 +142,6 @@
       }
     }
 
-    // Chamar a função para gerar os campos iniciais
     document.getElementById("ordem").addEventListener("input", gerarCamposMatriz);
   </script>
 </body>

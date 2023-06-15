@@ -10,7 +10,6 @@
             var matriz = [];
             var vetorB = [];
 
-            // Ler os valores da matriz e vetor B do formulário
             for (var i = 0; i < ordem; i++) {
                 matriz[i] = [];
                 vetorB[i] = parseFloat(document.getElementById("elemento-" + i + "-" + ordem).value);
@@ -45,7 +44,6 @@
                 }
             }
 
-            // Exibir a solução
             var resultado = document.getElementById("resultado");
             resultado.innerHTML = "Solução: ";
             for (var i = 0; i < ordem; i++) {
@@ -64,9 +62,7 @@
 
         <br><br>
 
-        <div id="matriz-form">
-            <!-- Os campos da matriz serão gerados dinamicamente com base na ordem do sistema -->
-        </div>
+        <div id="matriz-form"></div>
 
         <br>
 
@@ -79,7 +75,6 @@
         <div id="resultado"></div>
     </div>
     <script>
-        // Função para gerar os campos da matriz dinamicamente
         function gerarCamposMatriz() {
             var ordem = parseInt(document.getElementById("ordem").value);
             var matrizForm = document.getElementById("matriz-form");
