@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Eliminação de Gauss</title>
+  <link rel="stylesheet" href="../style.css">
   <script>
     function eliminarGauss() {
       var ordem = parseInt(document.getElementById("ordem").value);
@@ -107,33 +109,34 @@
     }
   </script>
 </head>
+
 <body>
-  <h1>Eliminação de Gauss</h1>
+  <h1>Eliminação de Gauss | Antonio Guirro de Azevedo</h1>
+  <div class="container">
+    <label for="ordem">Ordem do sistema: </label>
+    <input type="number" id="ordem">
+    <button onclick="eliminarGauss()">Calcular</button>
 
-  <label for="ordem">Ordem do sistema: </label>
-  <input type="number" id="ordem">
-  <button onclick="eliminarGauss()">Calcular</button>
+    <br><br>
 
-  <br><br>
+    <div id="matriz-form">
+      <!-- Os campos da matriz serão gerados dinamicamente com base na ordem do sistema -->
+    </div>
 
-  <div id="matriz-form">
-    <!-- Os campos da matriz serão gerados dinamicamente com base na ordem do sistema -->
+    <br>
+
+    <button onclick="window.location.reload()">Reiniciar</button>
+
+    <br><br>
+
+    <div id="resultado"></div>
+
+    <div id="matriz-l"></div>
+
+    <div id="matriz-u"></div>
+
+    <div id="matriz-p"></div>
   </div>
-
-  <br>
-
-  <button onclick="window.location.reload()">Reiniciar</button>
-
-  <br><br>
-
-  <div id="resultado"></div>
-
-  <div id="matriz-l"></div>
-
-  <div id="matriz-u"></div>
-
-  <div id="matriz-p"></div>
-
   <script>
     // Função para gerar os campos da matriz dinamicamente
     function gerarCamposMatriz() {
@@ -157,5 +160,5 @@
     document.getElementById("ordem").addEventListener("input", gerarCamposMatriz);
   </script>
 </body>
+
 </html>
-    

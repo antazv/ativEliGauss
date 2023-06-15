@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gauss-Seidel</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        function gaussSeidel() {
+            var ordem = parseInt(document.getElementById("ordem").value);
+            var matriz = [];
+            var vetorB = [];
+
+            // Ler os valores da matriz e vetor B do formulário
+            for (var i = 0; i < ordem; i++) {
+                matriz[i] = [];
+                vetorB[i] = parseFloat(document.getElementById("elemento-" + i + "-" + ordem).value);
+                for (var j = 0; j < ordem; j++) {
+                    matriz[i][j] = parseFloat(document.getElementById("elemento-" + i + "-" + j).value);
+                }
+            }
+
+            var maxIteracoes = 100;
+            var tolerancia = parseFloat(document.getElementById("tolerancia").value);
+            var x = new Array(ordem).fill(0);
+
+            for (var iteracao = 0; iteracao < maxIteracoes; iteracao++) {
+                var erro = 0;
+
+                for (var i = 0; i < ordem; i++) {
+                    var soma = 0;
+
+                    for (var j = 0; j < ordem; j++) {
+                        if (j !== i) {
+                            soma += matriz[i][j] * x[j];
+                        }
+                    }
+
+                    var novoX = (vetorB[i] - soma) / matriz[i][i];
+                    erro += Math.abs(novoX - x[i]);
+                    x[i] = novoX;
+                }
+
+                if (erro < tolerancia) {
+                    break;
+                }
+            }
+
+            // Exibir a solução
+            var resultado = document.getElementById("resultado");
+            resultado.innerHTML = "Solução: ";
+            for (var i = 0; i < ordem; i++) {
+                resultado.innerHTML += "x" + (i + 1) + " = " + x[i].toFixed(2) + " ";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Gauss-Seidel | Antonio Guirro de Azevedo</h1>
+    <div class="container">
+        <label for="ordem">Ordem do sistema: </label>
+        <input type="number" id="ordem">
+        <button onclick="gerarCamposMatriz()">Gerar Matriz</button>
+
+        <br><br>
+
+        <div id="matriz-form">
+            <!-- Os campos da matriz serão gerados dinamicamente com base na ordem do sistema -->
+        </div>
+
+        <br>
+
+        <label for="tolerancia">Tolerância: </label>
+        <input type="number" step="0.0001" id="tolerancia">
+        <button onclick="gaussSeidel()">Calcular</button>
+
+        <br><br>
+
+        <div id="resultado"></div>
+    </div>
+    <script>
+        // Função para gerar os campos da matriz dinamicamente
+        function gerarCamposMatriz() {
+            var ordem = parseInt(document.getElementById("ordem").value);
+            var matrizForm = document.getElementById("matriz-form");
+
+            matrizForm.innerHTML = "";
+            for (var i = 0; i < ordem; i++) {
+                for (var j = 0; j <= ordem; j++) {
+                    var input = document.createElement("input");
+                    input.type = "number";
+                    input.id = "elemento-" + i + "-" + j;
+                    input.placeholder = "Elemento " + (i + 1) + "," + (j + 1);
+                    matrizForm.appendChild(input);
+                }
+                matrizForm.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+</body>
+
+</html>

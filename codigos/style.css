@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#ff9e8c 40%, #ffd579);
+    background-attachment: fixed;
+}
+
+h1 {
+    color: #333;
+    padding-top: 10px;
+    padding-bottom: 35px;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="number"] {
+    padding: 5px;
+    margin: 5px;
+    width: 60px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+#matriz-form {
+    margin-top: 20px;
+}
+
+#resultado,
+#matriz-l,
+#matriz-u,
+#matriz-p {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.container{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
