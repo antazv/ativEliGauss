@@ -12,9 +12,8 @@ body {
 
 h1 {
     color: #333;
-    padding-top: 10px;
-    padding-bottom: 35px;
     text-align: center;
+    padding: 5px;
 }
 
 label {
@@ -30,6 +29,7 @@ input[type="number"] {
 button {
     padding: 8px 12px;
     background-color: #333;
+    border-radius: 10px;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -55,4 +55,12 @@ button:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.header{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 35px;
 }
